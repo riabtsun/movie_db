@@ -22,11 +22,13 @@ function showMovies(data) {
   main.innerHTML = ''
 
   data.forEach(movie => {
-    const {title, poster_path, vote_average, overview} = movie
+    const {title, poster_path, vote_average, overview, id} = movie
     const movieEl = document.createElement('div')
     movieEl.classList.add('movie')
     movieEl.innerHTML = `
-     <img src="${IMG_URL + poster_path}" alt="${title}">
+    <a target="_blank" href="${'https://www.themoviedb.org/movie/' + id}">
+        <img src="${IMG_URL + poster_path}" alt="${title}">
+     </a>
         <div class="movie-info">
             <h3 class="movie-title">${title}</h3>
             <span class="${getColor(vote_average)}">${vote_average}</span>
@@ -50,8 +52,7 @@ function getColor(vote) {
   }
 }
 
-form.addEventListener('submit', e => {
-  e.preventDefault();
+search.addEventListener('input', el => {
 
   const searchTerm = search.value
 
